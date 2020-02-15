@@ -8,12 +8,12 @@ let rolesValidos = {
 
 const UserSchema = Schema({
 
-    name: { type: String, required: [true, 'El nombre es obligatorio'] },
-    lastName: { type: String, required: [true, 'El apellido es obligatorio'] },
+    name: { type: String },
+    lastName: { type: String },
     email: { type: String, unique: true, required: [true, 'El email es obligatorio'] },
     password: { type: String, required: [true, 'La contraseña es obligatoria'] },
     role: { type: String, required: true, default: 'USER_ROLE', enum: rolesValidos },
-    active: Boolean
+    active: {type: Boolean, default : false}
 })
 
 module.exports = mongoose.model('User', UserSchema)
