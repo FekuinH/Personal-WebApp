@@ -59,7 +59,7 @@ function logIn(req, res) {
     if (!bcrypt.compareSync(password, userDB.password)) {
       return res.status(400).json({
         ok: false,
-        mensaje: "Error de credenciales - password",
+        message: "Error de credenciales - password",
         errors: { message: "No se pudo encontrar el usuario o contraseña" }
       });
     }
@@ -70,12 +70,11 @@ function logIn(req, res) {
         })
     }
 
-    console.log('estoy aca');
     
      res.status(200).json({
         ok: true,
-        mensaje: 'Ha iniciado sesión correctamente',
-        token: jwt.createAccesToken(userDB),
+        message: 'Ha iniciado sesión correctamente',
+        accesToken: jwt.createAccesToken(userDB),
         refreshToken: jwt.createRefreshToken(userDB),
         usuario: userDB
     });
