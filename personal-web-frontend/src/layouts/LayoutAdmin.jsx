@@ -4,6 +4,8 @@ import { Layout } from "antd";
 import MenuTop from "../component/admin/menuTop";
 import MenuSider from "../component/admin/menuSider/MenuSider";
 import AdmingSignIn from '../pages/Admin/SignIn/SignIn';
+import {getAccesToken} from '../api/auth';
+import useAuth from '../hooks/useAuth'
 
 import "./LayoutAdmin.scss";
 
@@ -21,6 +23,7 @@ export default function LayoutAdmin(props) {
   const user = null;
 
 
+  
 
   //cada vez que se accede a esta ruta, check si el usuario no esta logeado o identificado (null) devuelve la pagina de login
   return (!user)

@@ -1,34 +1,35 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import routes from "./config/routes";
+import AuthProvider from "./providers/AuthProvider";
 
-import './App.scss'
+import "./App.scss";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        {/* recibe todas las rutas, por cada una de ella mapea un componente con sus respectivos hijos */}
-          {routes.map((route,index) => (
+    <AuthProvider>
+      <Router>
+        <Switch>
+          {/* recibe todas las rutas, por cada una de ella mapea un componente con sus respectivos hijos */}
+          {routes.map((route, index) => (
             <RouteWithSubRoutes key={index} {...route} />
           ))}
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </AuthProvider>
   );
 }
 
-
 //funcion que recibe unas rutas y renderiza respectiva su respectiva ruta con todas sus hijas
-function RouteWithSubRoutes(route){
-  
+function RouteWithSubRoutes(route) {
   return (
     <Route
-    path={route.path}
-    exact={route.exact}
-    //renderiza todas las rutas que tiene como componentes esa ruta
-    render={props => <route.component routes={route.routes} {...props} />}
+      path={route.path}
+      exact={route.exact}
+      //renderiza todas las rutas que tiene como componentes esa ruta
+      render={props => <route.component routes={route.routes} {...props} />}
     />
-  )
+  );
 }
 
 export default App;

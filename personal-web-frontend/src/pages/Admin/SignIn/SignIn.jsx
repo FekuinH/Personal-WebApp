@@ -1,6 +1,5 @@
 import React from "react";
 import { Layout, Tabs } from "antd";
-import { Redirect } from "react-router-dom";
 import RegisterForm from "../../../component/admin/RegisterForm/RegisterForm";
 import LoginForm from "../../../component/admin/LoginForm";
 

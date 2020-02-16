@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { Form, Icon, Input, Button, notification } from "antd";
+import { Form, Icon, Input, Button } from "antd";
+import {loginApi} from '../../../api/userService';
+import { sendMessage } from "../../../utils/SuccesErrorMessage";
+import { Redirect } from "react-router-dom";
+
 import "./LoginForm.scss";
 
 export default function LoginForm() {
@@ -16,10 +20,16 @@ export default function LoginForm() {
         
     }
 
-    const login = (e) =>{
+    const login = async (e) =>{
         e.preventDefault()
-        console.log(inputs);
-      
+       const result = await loginApi(inputs); 
+       sendMessage(result.ok,result.message);
+       //si fue un login correcto guardo el token y redirect to admin
+       if (result.ok){
+        localStorage.setItem('accesToken',result.accesToken);
+        localStorage.setItem('refreshToken',result.refreshToken);
+        window.location.href = '/admin';
+       }
     }
   return (
     <Form className="login-form" onChange={handleForm} onSubmit={login}>
